@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRepositories } from './store/repositoryActions';
+import CircularProgress from '@mui/material/CircularProgress';
+import { List } from '@mui/material';
+import RepositoryListItem from './components/RepositoryListItem';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,9 +17,15 @@ function App() {
   return (
     <>
       <div className="text-red-400">code_challenge</div>
-      {loading && <p>Loading ...</p>}
-      {items.length > 0 && <p>Items ...</p>}
+      {loading && <CircularProgress />}
       {error == !null && <p>Error ...</p>}
+      {items.length > 0 && (
+        <List>
+          {items.map((repo) => (
+            <RepositoryListItem repo={repo} />
+          ))}
+        </List>
+      )}
     </>
   );
 }

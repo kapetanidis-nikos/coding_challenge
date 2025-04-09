@@ -11,7 +11,7 @@ const repositorySlice = createSlice({
     setState(state, action) {
       const { key, data } = action.payload;
 
-      if (state.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(state, key)) {
         state[key] = data;
       } else {
         console.log(`Key "${key}" does not exist in state. Creating it now.`);
