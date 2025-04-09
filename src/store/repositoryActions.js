@@ -4,6 +4,7 @@ import { googleAPI } from '../api/api';
 export const getRepositories = ({ perPage }) => {
   return async (dispatch) => {
     try {
+      //setError(null);
       dispatch(repositoryActions.setState({ key: 'loading', data: true }));
       const response = await googleAPI.get(`repos?per_page=${perPage}`);
 

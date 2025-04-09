@@ -6,6 +6,7 @@ import {
   Link,
   Typography,
   IconButton,
+  Pagination,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ export default function RepositoryListItem({ repo }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <ListItem key={repo.id}>
+    <ListItem>
       <ListItemAvatar>
         <Avatar alt={repo.owner.login} src={repo.owner.avatar_url} />
       </ListItemAvatar>
