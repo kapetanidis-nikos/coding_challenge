@@ -1,11 +1,15 @@
 
+import Button from '@mui/material/Button';
+
 function App() {
 
   return (
     <>
-code_challenge      
-    </>
-  )
+    <div className="text-red-400">
+    code_challenge      
+    </div>
+    <Button variant="contained">Hello world</Button>
+    </>)
 }
 
 export default App
