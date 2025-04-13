@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="flex pt-10 pb-10 justify-center w-full min-h-screen bg-slate-50 items-center">
-      <div className="w-1/2 gap-12 flex flex-col">
+      <div className="w-3/4 gap-12 flex flex-col">
         <Card>
           <PopularRepositories items={items} />
         </Card>

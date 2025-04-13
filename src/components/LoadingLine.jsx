@@ -9,7 +9,7 @@ export default function LoadingLine({ index }) {
         borderRadius: 2,
         marginBottom: 1,
         '& .MuiLinearProgress-bar': {
-          animationDuration: '10s',
+          animationDuration: '5s',
           animationDelay: `${index * 1}s`,
         },
       }}

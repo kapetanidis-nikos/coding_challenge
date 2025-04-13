@@ -1,6 +1,7 @@
 import React from 'react';
 import RepositoryListItem from './RepositoryListItem';
 import { List, Pagination } from '@mui/material';
+import LoadingLine from './LoadingLine';
 
 export default function ListControls({
   controls,
@@ -12,14 +13,16 @@ export default function ListControls({
   pagination,
 }) {
   return (
-    <>
-      <div className="flex justify-between w-full">{controls}</div>
-      {currentPageItems.length > 0 && (
+    <div className="w-full">
+      <div className="flex mb-6 gap-4 justify-between w-full">{controls}</div>
+      {currentPageItems.length > 0 ? (
         <List className="flex flex-col gap-2 w-full">
           {currentPageItems.map((repo) => (
             <RepositoryListItem key={repo.id} repo={repo} />
           ))}
         </List>
+      ) : (
+        Array.from({ length: itemsPerPage }).map((_, index) => <LoadingLine key={index} index={index} />)
       )}
       {pagination && (
         <Pagination
@@ -29,6 +32,6 @@ export default function ListControls({
           color="primary"
         />
       )}
-    </>
+    </div>
   );
 }
