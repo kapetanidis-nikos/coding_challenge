@@ -2,7 +2,15 @@ import React from 'react';
 import RepositoryListItem from './RepositoryListItem';
 import { List, Pagination } from '@mui/material';
 
-export default function ListControls({ controls, currentPageItems, sortedItems, itemsPerPage, page, setPage }) {
+export default function ListControls({
+  controls,
+  currentPageItems,
+  sortedItems,
+  itemsPerPage,
+  page,
+  setPage,
+  pagination,
+}) {
   return (
     <>
       <div className="flex justify-between w-full">{controls}</div>
@@ -13,12 +21,14 @@ export default function ListControls({ controls, currentPageItems, sortedItems, 
           ))}
         </List>
       )}
-      <Pagination
-        count={Math.ceil(sortedItems.length / itemsPerPage)}
-        page={page}
-        onChange={(event, value) => setPage(value)}
-        color="primary"
-      />
+      {pagination && (
+        <Pagination
+          count={Math.ceil(sortedItems.length / itemsPerPage)}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          color="primary"
+        />
+      )}
     </>
   );
 }

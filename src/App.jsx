@@ -44,6 +44,7 @@ function App() {
         <Card>
           <ListControls
             controls={controls}
+            pagination={true}
             items={items}
             currentPageItems={currentPageItems}
             sortedItems={sortedItems}
