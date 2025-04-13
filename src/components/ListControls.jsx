@@ -4,13 +4,13 @@ import { List, Pagination } from '@mui/material';
 import LoadingLine from './LoadingLine';
 
 export default function ListControls({
-  controls,
-  currentPageItems,
-  sortedItems,
-  itemsPerPage,
-  page,
-  setPage,
-  pagination,
+  controls = null,
+  currentPageItems = null,
+  sortedItems = null,
+  itemsPerPage = null,
+  page = null,
+  setPage = null,
+  pagination = null,
 }) {
   return (
     <div className="w-full">
@@ -25,12 +25,14 @@ export default function ListControls({
         Array.from({ length: itemsPerPage }).map((_, index) => <LoadingLine key={index} index={index} />)
       )}
       {pagination && (
-        <Pagination
-          count={Math.ceil(sortedItems.length / itemsPerPage)}
-          page={page}
-          onChange={(event, value) => setPage(value)}
-          color="primary"
-        />
+        <div className="flex justify-center mt-4">
+          <Pagination
+            count={Math.ceil(sortedItems.length / itemsPerPage)}
+            page={page}
+            onChange={(event, value) => setPage(value)}
+            color="primary"
+          />
+        </div>
       )}
     </div>
   );

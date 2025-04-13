@@ -37,15 +37,14 @@ function App() {
 
   return (
     <div className="flex pt-10 pb-10 justify-center w-full min-h-screen bg-slate-50 items-center">
-      <div className="w-3/4 gap-12 flex flex-col">
-        <Card>
+      <div className="w-3/5 gap-12 flex flex-col">
+        <Card title={'Popular Repositories'}>
           <PopularRepositories items={items} />
         </Card>
-        <Card>
+        <Card title={'All Repositories'}>
           <ListControls
             controls={controls}
             pagination={true}
-            items={items}
             currentPageItems={currentPageItems}
             sortedItems={sortedItems}
             itemsPerPage={itemsPerPage}
