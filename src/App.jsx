@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRepositories } from './store/repositoryActions';
-import CircularProgress from '@mui/material/CircularProgress';
-import { List, Pagination } from '@mui/material';
-import RepositoryListItem from './components/RepositoryListItem';
+import ListControls from './components/ListControls';
 import ItemsPerPageSelector from './components/ItemsPerPageSelector';
 import SearchInput from './components/SearchInput';
 import ItemsSortingSelector from './components/ItemsSortingSelector';
-import { sortRepositories } from './utils';
+import { filterByQuery, paginateItems, sortRepositories } from './utils';
 import PopularRepositories from './components/PopularRepositories';
+import Card from './components/Card';
 
 function App() {
   const [page, setPage] = useState(1);
@@ -24,50 +23,35 @@ function App() {
 
   const { items, loading, error } = useSelector((state) => state.repository);
 
-  // Filter items based on search query
-  const filteredItems = items.filter(
-    (repo) => repo.name.toLowerCase().includes(searchQuery.toLowerCase()), // Filter by repo name
+  const filteredItems = filterByQuery(items, searchQuery);
+  const sortedItems = sortRepositories(filteredItems, sortBy);
+  const currentPageItems = paginateItems(sortedItems, page, itemsPerPage);
+
+  const controls = (
+    <>
+      <SearchInput setPage={setPage} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <ItemsPerPageSelector itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} setPage={setPage} />
+      <ItemsSortingSelector sortBy={sortBy} setSortBy={setSortBy} />
+    </>
   );
 
-  const sortedItems = sortRepositories(filteredItems, sortBy);
-
-  // Calculate the index range for the current page
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentPageItems = sortedItems.slice(startIndex, endIndex);
-
   return (
-    <div className="flex flex-col justify-center w-full min-h-screen bg-slate-50 items-center">
-      <div className="w-1/2">
-        <PopularRepositories items={items} />
-        {items.length > 0 && (
-          <div className="w-full flex flex-col gap-6 items-center bg-slate-100 p-6 rounded-2xl">
-            <div className="flex justify-between w-full">
-              <SearchInput
-                setPage={setPage}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-              />
-              <ItemsPerPageSelector
-                itemsPerPage={itemsPerPage}
-                setItemsPerPage={setItemsPerPage}
-                setPage={setPage}
-              />
-              <ItemsSortingSelector sortBy={sortBy} setSortBy={setSortBy} />
-            </div>
-            <List className="flex flex-col gap-2 w-full">
-              {currentPageItems.map((repo) => (
-                <RepositoryListItem key={repo.id} repo={repo} />
-              ))}
-            </List>
-            <Pagination
-              count={Math.ceil(items.length / itemsPerPage)}
-              page={page}
-              onChange={(value) => setPage(value)}
-              color="primary"
-            />
-          </div>
-        )}
+    <div className="flex pt-10 pb-10 justify-center w-full min-h-screen bg-slate-50 items-center">
+      <div className="w-1/2 gap-12 flex flex-col">
+        <Card>
+          <PopularRepositories items={items} />
+        </Card>
+        <Card>
+          <ListControls
+            controls={controls}
+            items={items}
+            currentPageItems={currentPageItems}
+            sortedItems={sortedItems}
+            itemsPerPage={itemsPerPage}
+            page={page}
+            setPage={setPage}
+          />
+        </Card>
       </div>
     </div>
   );
