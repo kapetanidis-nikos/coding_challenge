@@ -4,7 +4,6 @@ import { getRepositories } from './store/repositoryActions';
 import Card from './components/Card';
 import PopularRepositories from './components/PopularRepositories';
 import AllRepositories from './components/AllRepositories';
-import FloatingShape from './components/FloatingShape';
 
 function App() {
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ function App() {
     dispatch(getRepositories({ perPage: 100 }));
   }, [dispatch]);
 
-  const { items, loading, error } = useSelector((state) => state.repository);
+  const { items } = useSelector((state) => state.repository);
 
   return (
     <div className="flex pt-10 pb-10 justify-center w-full min-h-screen bg-slate-200 items-center">

@@ -1,17 +1,14 @@
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
-export default function ItemsPerPageSelector({
-  itemsPerPage,
-  setItemsPerPage,
-  setPage,
-}) {
+export default function ItemsPerPageSelector({ itemsPerPage, setItemsPerPage, setPage }) {
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(event.target.value);
     setPage(1);
   };
 
   return (
-    <FormControl sx={{ minWidth: 120 }} size="small">
+    <FormControl sx={{ minWidth: 120, backgroundColor: grey[50] }} size="small">
       <InputLabel id="items-per-page-label">Items per page</InputLabel>
       <Select
         labelId="items-per-page-label"

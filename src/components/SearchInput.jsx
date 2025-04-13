@@ -1,5 +1,6 @@
 import { TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { grey } from '@mui/material/colors';
 
 export default function SearchInput({ setPage, searchQuery, setSearchQuery }) {
   const handleSearchChange = (event) => {
@@ -15,6 +16,9 @@ export default function SearchInput({ setPage, searchQuery, setSearchQuery }) {
       value={searchQuery}
       onChange={handleSearchChange}
       className="w-2/3"
+      sx={{
+        backgroundColor: grey[50],
+      }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
