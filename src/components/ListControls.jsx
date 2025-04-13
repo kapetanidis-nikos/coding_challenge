@@ -1,8 +1,8 @@
 import React from 'react';
-import RepositoryListItem from './RepositoryListItem';
 import { List, Pagination } from '@mui/material';
 import LoadingLine from './LoadingLine';
 import RepositoryListItem2 from './RepositoryListItem2';
+import { blue } from '@mui/material/colors';
 
 export default function ListControls({
   controls = null,
@@ -32,6 +32,14 @@ export default function ListControls({
             page={page}
             onChange={(event, value) => setPage(value)}
             color="primary"
+            sx={{
+              '& .Mui-selected': {
+                backgroundColor: blue[300],
+                '&:hover': {
+                  backgroundColor: blue[500],
+                },
+              },
+            }}
           />
         </div>
       )}
