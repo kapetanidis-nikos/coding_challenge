@@ -15,7 +15,7 @@ export default function RepositoryListItem({ repo }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <ListItem>
+    <ListItem className="bg-slate-100 rounded-2xl">
       <ListItemAvatar>
         <Avatar alt={repo.owner.login} src={repo.owner.avatar_url} />
       </ListItemAvatar>
@@ -28,7 +28,11 @@ export default function RepositoryListItem({ repo }) {
             </Typography>
             {open && (
               <>
-                {repo.description && <p>{repo.description}</p>}
+                {repo.description ? (
+                  <p>{repo.description}</p>
+                ) : (
+                  <p>No description provided</p>
+                )}
                 <Link
                   href={repo.html_url}
                   target="_blank"

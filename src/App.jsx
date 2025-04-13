@@ -23,13 +23,12 @@ function App() {
   const currentPageItems = items.slice(startIndex, endIndex);
 
   return (
-    <>
-      <div className="text-red-400">code_challenge</div>
+    <div className="flex flex-col justify-center h-screen items-center">
       {loading && <CircularProgress />}
       {error == !null && <p>Error ...</p>}
       {items.length > 0 && (
-        <>
-          <List>
+        <div className="w-full flex flex-col gap-6 items-center">
+          <List className="flex flex-col gap-2 w-1/3">
             {currentPageItems.map((repo) => (
               <RepositoryListItem key={repo.id} repo={repo} />
             ))}
@@ -40,9 +39,9 @@ function App() {
             onChange={(event, value) => setPage(value)}
             color="primary"
           />
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
