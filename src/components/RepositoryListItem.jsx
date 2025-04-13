@@ -1,4 +1,13 @@
-import { ListItem, ListItemText, ListItemAvatar, Avatar, Link, Typography, IconButton } from '@mui/material';
+import {
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Link,
+  Typography,
+  IconButton,
+  Pagination,
+} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 
@@ -6,35 +15,40 @@ export default function RepositoryListItem({ repo }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-slate-300 rounded-2xl">
-      <ListItem>
+    <>
+      <ListItem
+        className="bg-slate-100 rounded-md"
+        secondaryAction={
+          <IconButton
+            className={`transform transition-transform duration-300 ease-in-out ${open ? 'rotate-180' : ''}`}
+            onClick={() => setOpen((prevState) => !prevState)}
+          >
+            <KeyboardArrowDownIcon />
+          </IconButton>
+        }
+      >
         <ListItemAvatar>
           <Avatar alt={repo.owner.login} src={repo.owner.avatar_url} />
         </ListItemAvatar>
         <ListItemText
-          primary={
-            <div className="flex gap-4">
-              <h2>{repo.name}</h2>
-              <p> Stars: {repo.stargazers_count}</p>
-            </div>
+          primary={repo.name}
+          secondary={
+            <>
+              <Typography variant="body2" color="textSecondary">
+                Stars: {repo.stargazers_count}
+              </Typography>
+            </>
           }
-          // secondary={}
         />
-        <IconButton
-          className={`transform transition-transform duration-300 ease-in-out ${open ? 'rotate-180' : ''}`}
-          onClick={() => setOpen((prevState) => !prevState)}
-        >
-          <KeyboardArrowDownIcon />
-        </IconButton>
       </ListItem>
       {open && (
-        <div className="ml-">
-          {repo.description ? <p>{repo.description}</p> : <p>No description provided</p>}
+        <div className="bg-slate-200">
+          {repo.description ? <p>{repo.description}</p> : <p>No description description</p>}
           <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
-            Go to repo
+            See on Github
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 }

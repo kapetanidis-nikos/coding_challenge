@@ -2,6 +2,7 @@ import React from 'react';
 import RepositoryListItem from './RepositoryListItem';
 import { List, Pagination } from '@mui/material';
 import LoadingLine from './LoadingLine';
+import RepositoryListItem2 from './RepositoryListItem2';
 
 export default function ListControls({
   controls = null,
@@ -18,7 +19,7 @@ export default function ListControls({
       {currentPageItems.length > 0 ? (
         <List className="flex flex-col gap-2 w-full">
           {currentPageItems.map((repo) => (
-            <RepositoryListItem key={repo.id} repo={repo} />
+            <RepositoryListItem2 key={repo.id} repo={repo} />
           ))}
         </List>
       ) : (
