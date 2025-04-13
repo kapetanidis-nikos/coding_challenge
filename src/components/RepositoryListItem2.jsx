@@ -41,7 +41,7 @@ export default function RepositoryListItem2({ repo }) {
         <ListItemText
           primary={
             <div className="flex gap-8 items-center ">
-              <p className="min-w-60">{repo.name}</p>
+              <p className="min-w-[33.33%]">{repo.name}</p>
               <div className="flex gap-2 ">
                 <StarBorder />
                 <p>{repo.stargazers_count}</p>
