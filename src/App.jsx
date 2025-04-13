@@ -2,22 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRepositories } from './store/repositoryActions';
 import CircularProgress from '@mui/material/CircularProgress';
-import {
-  List,
-  Pagination,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import { List, Pagination } from '@mui/material';
 import RepositoryListItem from './components/RepositoryListItem';
 import ItemsPerPageSelector from './components/ItemsPerPageSelector';
 import SearchInput from './components/SearchInput';
+import ItemsSortingSelector from './components/ItemsSortingSelector';
+import { sortRepositories } from './utils';
 
 function App() {
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('name');
 
   const dispatch = useDispatch();
 
@@ -32,17 +28,19 @@ function App() {
     (repo) => repo.name.toLowerCase().includes(searchQuery.toLowerCase()), // Filter by repo name
   );
 
+  const sortedItems = sortRepositories(filteredItems, sortBy);
+
   // Calculate the index range for the current page
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentPageItems = filteredItems.slice(startIndex, endIndex);
+  const currentPageItems = sortedItems.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col justify-center h-screen items-center">
       {loading && <CircularProgress />}
       {error == !null && <p>Error ...</p>}
       {items.length > 0 && (
-        <div className="w-1/3 flex flex-col gap-6 items-center bg-slate-100 p-6 rounded-2xl">
+        <div className="w-1/2 flex flex-col gap-6 items-center bg-slate-100 p-6 rounded-2xl">
           <div className="flex justify-between w-full">
             <SearchInput
               setPage={setPage}
@@ -54,6 +52,7 @@ function App() {
               setItemsPerPage={setItemsPerPage}
               setPage={setPage}
             />
+            <ItemsSortingSelector sortBy={sortBy} setSortBy={setSortBy} />
           </div>
           <List className="flex flex-col gap-2 w-full">
             {currentPageItems.map((repo) => (
