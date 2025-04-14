@@ -27,5 +27,12 @@ export default function PopularRepositories({ items }) {
       {showAllPopular ? 'Show Less' : 'Show More'}
     </Button>
   );
-  return <ListControls controls={controls} pagination={false} currentPageItems={displayedPopularRepos} />;
+  return (
+    <ListControls
+      controls={controls}
+      pagination={false}
+      itemsPerPage={itemsPerPage}
+      currentPageItems={displayedPopularRepos}
+    />
+  );
 }

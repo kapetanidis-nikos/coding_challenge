@@ -16,7 +16,7 @@ export default function ListControls({
   return (
     <div className="w-full">
       <div className="flex mb-6 gap-4 justify-between w-full">{controls}</div>
-      {currentPageItems.length > 0 ? (
+      {currentPageItems.length > 110 ? (
         <List className="flex flex-col gap-2 w-full">
           {currentPageItems.map((repo) => (
             <RepositoryItem key={repo.id} repo={repo} />

@@ -5,7 +5,7 @@ export default function LoadingLine({ index }) {
     <LinearProgress
       variant="indeterminate"
       sx={{
-        height: 25,
+        height: 35,
         borderRadius: 2,
         marginBottom: 1,
         '& .MuiLinearProgress-bar': {
