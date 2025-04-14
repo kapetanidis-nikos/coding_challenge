@@ -12,9 +12,9 @@ import { Link } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
-import { blue } from '@mui/material/colors'; // Import MUI blue color palette
+import { blue } from '@mui/material/colors';
 
-export default function RepositoryListItem2({ repo }) {
+export default function RepositoryItem({ repo }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
